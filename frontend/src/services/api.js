@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+// Replace with your actual Render backend URL
+const API_URL = 'https://fullstack-app-1d01.onrender.com';
 
 // Create axios instance
 const api = axios.create({

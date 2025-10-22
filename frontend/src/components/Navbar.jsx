@@ -1,86 +1,34 @@
-import { Link } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import React, { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
+import Button from './Button';
 
-function Navbar() {
-  const { user, logout } = useAuth()
+const Navbar = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <nav style={{
-      backgroundColor: '#343a40',
-      padding: '1rem 0',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-    }}>
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '0 1rem',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <Link 
-          to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-            fontSize: '1.5rem',
-            fontWeight: 'bold'
-          }}
-        >
-          🚀 FullStack App
-        </Link>
-        
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          {user ? (
-            <>
-              <span style={{ color: 'white' }}>
-                Welcome, {user.name}
-              </span>
-              <button 
-                onClick={logout}
-                style={{
-                  padding: '0.5rem 1rem',
-                  backgroundColor: '#dc3545',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer'
-                }}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <Link 
-                to="/login"
-                style={{
-                  padding: '0.5rem 1rem',
-                  color: 'white',
-                  textDecoration: 'none',
-                  borderRadius: '4px'
-                }}
-              >
-                Login
-              </Link>
-              <Link 
-                to="/register"
-                style={{
-                  padding: '0.5rem 1rem',
-                  backgroundColor: '#28a745',
-                  color: 'white',
-                  textDecoration: 'none',
-                  borderRadius: '4px'
-                }}
-              >
-                Register
-              </Link>
-            </div>
-          )}
+    <nav className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+              🚀 Kwako Task Manager
+            </h1>
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            <Button 
+              variant="secondary" 
+              onClick={toggleTheme}
+              className="flex items-center space-x-2"
+            >
+              <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
+              <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
+            </Button>
+          </div>
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -18,6 +18,8 @@ function App() {
             <Route path="/tasks" element={<TaskManager />} />
             <Route path="/users" element={<UsersPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            {/* Add a catch-all route to handle 404s */}
+            <Route path="*" element={<Home />} />
           </Routes>
         </Layout>
       </Router>
